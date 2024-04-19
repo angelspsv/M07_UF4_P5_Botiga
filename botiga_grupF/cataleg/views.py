@@ -35,4 +35,13 @@ def create_product(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@api_view(['DELETE'])
+def delete_product(request, pk):
+
+    product = Catalogo.objects.get(pk=pk)
+    if product is None:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    product.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
