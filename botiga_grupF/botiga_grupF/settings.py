@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'modules.cataleg.apps.CatalegConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
