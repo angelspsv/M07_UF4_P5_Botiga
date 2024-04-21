@@ -4,9 +4,9 @@ services:
     image: postgres:13
     container_name: db
     environment:  
-      - POSTGRES_DB=botiga_prova
+      - POSTGRES_DB=botiga
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_USER= usuario # añadir usuario
+      - POSTGRES_USER=sergio
     ports:
       - "5432:5432"
     volumes:
@@ -17,8 +17,8 @@ services:
     ports:
       - "80:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: correo@ejemplo.com # añadir correo
-      PGADMIN_DEFAULT_PASSWORD: contraseña # añadir contraseña
+      PGADMIN_DEFAULT_EMAIL: 2023_sergio.castillero@iticbcn.cat
+      PGADMIN_DEFAULT_PASSWORD: 235sergioC
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 volumes:
