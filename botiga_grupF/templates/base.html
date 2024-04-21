@@ -1,0 +1,18 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'styles/header.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOTIGA</title>
+</head>
+<body>
+  {% if not is_login and not is_register %}  <!-- Condición para incluir el header -->
+  {% include 'head/header.html' %}
+    {% endif %}
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}  <!-- Asegúrate de heredar de tu plantilla base -->
+
+{% block content %}
+<div class="container">
+    <h2>Modificar Información del Usuario</h2>
+
+    <!-- Mostrar mensajes de éxito o error -->
+    {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Formulario para modificar información del usuario -->
+    <form method="post">  <!-- Usa el método POST para enviar datos -->
+        {% csrf_token %}  <!-- Token de seguridad CSRF -->
+        
+        <!-- Renderizar el formulario -->
+        {{ form.as_p }}  <!-- Renderizar el formulario con formato de párrafos -->
+
+        <!-- Botones para guardar o cancelar -->
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancelar</a>  <!-- Botón para cancelar y volver al dashboard -->
+    </form>
+</div>
+{% endblock %}

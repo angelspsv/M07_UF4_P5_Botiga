@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Registrar Usuari</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderitza el formulari com a paràgrafs -->
+        <button type="submit">Registrar</button>
+    </form>
+    
+    <a href="{% url 'usuarios:login' %}">Ja tens un compte? Inicia sessió</a>
+
+{% endblock %}
