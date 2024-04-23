@@ -1,8 +1,9 @@
-{% extends 'base.html' %}  <!-- Asegúrate de heredar de tu plantilla base -->
+{% extends 'base.html' %}
 
 {% block content %}
+{% include 'head/header.html' %}
 <div class="container">
-    <h2>Modificar Información del Usuario</h2>
+    <h2>Modificar Usuario</h2>
 
     <!-- Mostrar mensajes de éxito o error -->
     {% if messages %}
@@ -16,15 +17,22 @@
     {% endif %}
 
     <!-- Formulario para modificar información del usuario -->
-    <form method="post">  <!-- Usa el método POST para enviar datos -->
-        {% csrf_token %}  <!-- Token de seguridad CSRF -->
-        
-        <!-- Renderizar el formulario -->
-        {{ form.as_p }}  <!-- Renderizar el formulario con formato de párrafos -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-        <!-- Botones para guardar o cancelar -->
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancelar</a>  <!-- Botón para cancelar y volver al dashboard -->
+        <!-- Contenedor de botones con flexbox -->
+        <div class="button-container">
+            <div>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+            <!-- Formulario para eliminar cuenta -->
+            <form method="post" class="inline-form">
+                {% csrf_token %}
+                <button type="submit" name="confirm" value="yes" class="btn btn-danger">Eliminar cuenta</button>
+            </form>
+        </div>
     </form>
 </div>
 {% endblock %}
