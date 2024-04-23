@@ -1,0 +1,90 @@
+/* Estilos para el contenedor principal */
+.container {
+    max-width: 800px;
+    /* Ancho máximo */
+    margin: 20px auto;
+    /* Centrar en la página */
+    padding: 20px;
+    background-color: #fff;
+    /* Fondo blanco */
+    border: 1px solid #ddd;
+    /* Borde gris claro */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+}
+
+/* Estilos para los formularios */
+form p {
+    margin-bottom: 15px;
+    /* Espacio entre elementos del formulario */
+}
+
+label {
+    font-weight: bold;
+    /* Negrita para las etiquetas */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    margin: 8px 0px 0px 0px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+/* Estilos para los botones */
+.button-container {
+    display: flex;
+    /* Uso de flexbox */
+    justify-content: space-between;
+    /* Alinear botones con espacio entre ellos */
+    align-items: center;
+    /* Alineación vertical */
+    margin-top: 20px;
+    /* Espacio entre formulario y botones */
+}
+
+.inline-form {
+    display: inline;
+    /* Mantener el formulario para eliminar cuenta en línea */
+}
+
+.btn {
+    padding: 10px 20px;
+    /* Tamaño del botón */
+    border: none;
+    /* Sin bordes fuertes */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Para indicar interactividad */
+    font-size: 1em;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    /* Azul para botón primario */
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    /* Gris para botón secundario */
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    /* Rojo para botón de eliminar */
+    color: #fff;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    /* Efecto de hover para todos los botones */
+}

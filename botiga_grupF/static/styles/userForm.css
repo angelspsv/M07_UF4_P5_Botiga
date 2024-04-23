@@ -1,0 +1,76 @@
+/* Estilos generales para el cuerpo */
+body {
+    font-family: Arial, sans-serif;  /* Fuente legible */
+    margin: 0;  /* Eliminar márgenes por defecto */
+    padding: 0;  /* Eliminar relleno por defecto */
+    background-color: #f5f5f5;  /* Color de fondo suave */
+  }
+  
+  /* Estilo para el encabezado principal */
+  h1 {
+    text-align: center;  /* Centramos el título */
+    font-size: 2em;  /* Tamaño de fuente grande */
+    margin-top: 20px;  /* Espacio superior */
+    color: #333;  /* Color del texto */
+  }
+  
+  /* Estilo para el contenedor del formulario */
+  form {
+    max-width: 600px;  /* Ancho máximo del formulario */
+    margin: 20px auto;  /* Centramos el formulario horizontalmente */
+    padding: 20px;  /* Añadimos relleno interno */
+    background-color: white;  /* Fondo blanco para el formulario */
+    border: 1px solid #ddd;  /* Borde suave */
+    border-radius: 5px;  /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Sombra sutil */
+  }
+  
+  /* Estilos para las etiquetas y los campos del formulario */
+  label {
+    display: block;  /* Etiquetas como bloques */
+    font-weight: bold;  /* Texto en negrita */
+    margin-bottom: 5px;  /* Espacio entre etiqueta y campo */
+  }
+  
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"] {
+    width: 100%;  /* Campos de ancho completo */
+    padding: 10px;  /* Relleno interno */
+    border: 1px solid #ccc;  /* Borde de los campos */
+    border-radius: 4px;  /* Bordes redondeados */
+    font-size: 1em;  /* Tamaño de fuente */
+    box-sizing: border-box;  /* Asegurar que el ancho incluya el borde */
+    margin-bottom: 15px;  /* Espacio inferior entre campos */
+  }
+  
+  /* Estilo para el botón de enviar */
+  button[type="submit"] {
+    background-color: #007bff;  /* Color azul para el botón */
+    color: white;  /* Texto en blanco */
+    border: none;  /* Sin borde */
+    border-radius: 4px;  /* Bordes redondeados */
+    padding: 10px 20px;  /* Tamaño del botón */
+    cursor: pointer;  /* Indicador de clic */
+    font-size: 1em;  /* Tamaño de fuente */
+  }
+  
+  /* Efecto hover para el botón de enviar */
+  button[type="submit"]:hover {
+    background-color: #0056b3;  /* Cambiar color al pasar el ratón */
+  }
+  
+  /* Estilo para el enlace de iniciar sesión */
+  a {
+    display: block;  /* Enlace como bloque */
+    text-align: center;  /* Centramos el texto */
+    color: #007bff;  /* Azul para el texto */
+    text-decoration: none;  /* Sin subrayado */
+    margin-top: 10px;  /* Espacio superior */
+  }
+  
+  /* Efecto hover para el enlace */
+  a:hover {
+    text-decoration: underline;  /* Subrayado al pasar el ratón */
+  }
+  
