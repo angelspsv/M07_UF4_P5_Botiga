@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -38,6 +39,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'botiga_grupF.urls'
+
+# AUTH_USER_MODEL = 'usuarios.Usuarios'
+# LOGIN_URL = 'usuarios:login'
+SESSION_COOKIE_AGE = 1209600  # en segundos
 
 TEMPLATES = [
     {
@@ -65,7 +70,7 @@ WSGI_APPLICATION = 'botiga_grupF.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'botiga_prova',
+        'NAME': 'botiga',
         'USER': 'sergio',
         'PASSWORD': '1234',
         'HOST': 'localhost',
