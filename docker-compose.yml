@@ -15,7 +15,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin4
     ports:
-      - "82:80"
+      - "83:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: 2023_angel.ivanov@iticbcn.cat
       PGADMIN_DEFAULT_PASSWORD: angel123
