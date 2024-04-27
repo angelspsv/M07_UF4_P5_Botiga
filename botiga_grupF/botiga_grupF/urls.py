@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
-from usuarios.views import dashboard_view
+from usuarios.urls import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('usuario/', include('usuarios.urls')), 
-    path('dashboard/', dashboard_view, name='dashboard'),
+    path('usuarios/', include(router.urls)),
 ]
