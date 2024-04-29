@@ -17,7 +17,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# afegida l'app de Cataleg
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,6 +68,7 @@ WSGI_APPLICATION = 'botiga_grupF.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# configuració per la bbdd (postgresql) de la pràctica
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
