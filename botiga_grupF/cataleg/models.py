@@ -1,11 +1,12 @@
 from django.db import models
 
-# tabla modelo de productos
+# tabla de secciones de productos
 class CatalogoSecciones(models.Model):
     id_seccion = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=255)
 
 
+# tabla de productos
 class Catalogo(models.Model):
     id_producto = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=255)
