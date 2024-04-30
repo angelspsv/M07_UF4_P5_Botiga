@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from decimal import Decimal
 from .models import Pagos
 from .serializers import ProductoSerializer
-from.models import UsuariosTarjetas
-from.serializers import UsuariosTarjetasSerializer
+# linies comentades per poder executar i provar el funcionament de la ruta confirm_card...
+# from.models import UsuariosTarjetas
+# from.serializers import UsuariosTarjetasSerializer
 
 
 
