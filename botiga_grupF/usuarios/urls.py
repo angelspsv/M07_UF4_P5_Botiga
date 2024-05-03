@@ -1,7 +1,7 @@
-from rest_framework.routers import DefaultRouter
-from .views import UsuariosViewSet
+from django.urls import path
+from . import views
 
-router = DefaultRouter()
-router.register(r'', UsuariosViewSet)
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('', views.usuarios_list, name='usuarios-list'),          # Ruta para la lista y creación
+    path('<int:pk>/', views.usuarios_detail, name='usuarios-detail'),  # Ruta para detalle, actualización y eliminación
+]
