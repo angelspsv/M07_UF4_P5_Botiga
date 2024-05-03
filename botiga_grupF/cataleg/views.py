@@ -15,26 +15,36 @@ def hello_world_view(request):
 
 
 # funcionalidad crear producto
-@api_view(['POST'])
+@api_view(['GET','POST'])
 def create_product(request):
+    if request.method == 'POST':
+        # validamos request
+        if not request.data or not 'nombre' in request.data or not 'precio' in request.data:
+            return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
 
-    # validamos request
-    if not request.data or not 'nombre' in request.data or not 'precio' in request.data:
-        return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
+        # crear objeto para bbdd
+        catalogo = Catalogo.objects.create(
+            id_producto=request.data['id_producto'],
+            nombre=request.data['nombre'],
+            descripcion=request.data.get('descripcion', ''),
+            precio=request.data['precio'],
+            stock=request.data.get('stock', 0),
+            peso=request.data.get('peso', 0)
+        )
 
-    # crear objeto para bbdd
-    catalogo = Catalogo.objects.create(
-        nombre=request.data['nombre'],
-        descripcion=request.data.get('descripcion', ''),
-        id_seccion=request.data.get('id_seccion', 0),
-        precio=request.data['precio'],
-        stock=request.data.get('stock', 0),
-        peso=request.data.get('peso', 0)
-    )
+        # enviar datos bbdd usando serializer
+        serializer = ProductoSerializer(catalogo)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # enviar datos bbdd usando serializer
-    serializer = ProductoSerializer(catalogo)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    if request.method == 'GET':
+        # muestra todos los productos de la bbdd
+        catalogo = Catalogo.objects.all()
+
+        # usando serializer para ver los productos de la query a json
+        serializer = ProductoSerializer(catalogo, many=True)
+        return Response(serializer.data)
+
+
 
 
 # funcionalidad eliminar producto
