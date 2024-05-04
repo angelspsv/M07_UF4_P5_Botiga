@@ -49,7 +49,7 @@ def delete_product(request, pk):
 
 
 # funcionalidad actualizar producto
-@api_view(['UPDATE'])
+@api_view(['PUT', 'PATCH'])
 def update_product(request, pk):
     if not request.data or not 'nombre' in request.data or not 'precio' in request.data:
         return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
