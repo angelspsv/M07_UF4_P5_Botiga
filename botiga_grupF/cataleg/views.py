@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from .models import Catalogo
 from .serializers import ProductoSerializer
 
+
+
 # de prueba
 @api_view(['GET'])
 def hello_world_view(request):
@@ -14,36 +16,23 @@ def hello_world_view(request):
     return Response({"message": message}, status=status.HTTP_200_OK)
 
 
-# funcionalidad crear producto
-@api_view(['GET','POST'])
+# Llista tots els productes o crea un de nou.
+# amb GET: retorna una llista amb tots els productes.
+# amb POST: crea un nou producte.
+
+@api_view(['GET', 'POST'])
 def create_product(request):
+
     if request.method == 'POST':
-        # validamos request
-        if not request.data or not 'nombre' in request.data or not 'precio' in request.data:
-            return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ProductoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        # crear objeto para bbdd
-        catalogo = Catalogo.objects.create(
-            id_producto=request.data['id_producto'],
-            nombre=request.data['nombre'],
-            descripcion=request.data.get('descripcion', ''),
-            precio=request.data['precio'],
-            stock=request.data.get('stock', 0),
-            peso=request.data.get('peso', 0)
-        )
-
-        # enviar datos bbdd usando serializer
-        serializer = ProductoSerializer(catalogo)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    if request.method == 'GET':
-        # muestra todos los productos de la bbdd
+    elif request.method == 'GET':
         catalogo = Catalogo.objects.all()
-
-        # usando serializer para ver los productos de la query a json
         serializer = ProductoSerializer(catalogo, many=True)
         return Response(serializer.data)
-
 
 
 
