@@ -37,16 +37,17 @@ def create_product(request):
 
 
 
-# funcionalidad eliminar producto
+# funcionalidad eliminar producto funciona por el id del producto
 @api_view(['DELETE'])
 def delete_product(request, pk):
 
-    product = Catalogo.objects.get(pk=pk)
-    if product is None:
-        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+    product = get_object_or_404(Catalogo, pk=pk)
 
-    product.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
+    if request.method == 'DELETE':
+        product.delete()
+        message = {'detail': 'Product with ID {} was deleted successfully.'.format(pk)}
+        return Response(message, status=status.HTTP_200_OK)
+
 
 
 # funcionalidad actualizar producto
