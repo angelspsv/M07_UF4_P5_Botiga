@@ -3,8 +3,9 @@ from decimal import Decimal
 from django.shortcuts import render, redirect
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from .models import Catalogo
+from .models import Catalogo, CatalogoSecciones
 from .serializers import ProductoSerializer
 
 
@@ -49,22 +50,35 @@ def delete_product(request, pk):
 
 
 # funcionalidad actualizar producto
-@api_view(['PUT', 'PATCH'])
+# con GET primero recupero desde la bbdd el elemento con pk indicada en la url
+# despues con PATCH o PUT actualizo datos del producto
+# vuelvo a mostrar el producto actualizado
+
+@api_view(['GET', 'PUT', 'PATCH'])
 def update_product(request, pk):
-    if not request.data or not 'nombre' in request.data or not 'precio' in request.data:
-        return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'GET':
+        product = Catalogo.objects.get(pk=pk)
+        serializer = ProductoSerializer(product)
+        return Response(serializer.data)
 
-    product = Catalogo.objects.get(pk=pk)
-    if product is None:
-        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+    elif request.method == 'PUT' or request.method == 'PATCH':
+        if not request.data or not 'nombre' in request.data or not 'precio' in request.data:
+            return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
 
-    product.nombre = request.data['nombre']
-    product.descripcion = request.data.get('descripcion', product.descripcion)
-    product.id_seccion = request.data.get('id_seccion', product.id_seccion)
-    product.precio = request.data['precio']
-    product.stock = request.data.get('stock', product.stock)
-    product.peso = request.data.get('peso', product.peso)
-    product.save()
+        product = Catalogo.objects.get(pk=pk)
+        if product is None:
+            return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = ProductoSerializer(product)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+        if 'id_seccion' in request.data:
+            seccion = CatalogoSecciones.objects.get(pk=request.data['id_seccion'])
+            product.id_seccion = seccion
+
+        product.nombre = request.data['nombre']
+        product.descripcion = request.data.get('descripcion', product.descripcion)
+        product.precio = request.data['precio']
+        product.stock = request.data.get('stock', product.stock)
+        product.peso = request.data.get('peso', product.peso)
+        product.save()
+
+        serializer = ProductoSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
