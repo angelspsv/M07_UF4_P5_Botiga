@@ -74,8 +74,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'botiga',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
+        #'USER': 'admin', # angel user
+        #'PASSWORD': 'admin', # angel password
+        'USER': 'sergio', # sergio user
+        'PASSWORD': '1234', # sergio password
         'HOST': 'localhost',
         'PORT': '5432',
     }

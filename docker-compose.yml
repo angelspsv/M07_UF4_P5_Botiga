@@ -5,8 +5,10 @@ services:
     container_name: db
     environment:
       - POSTGRES_DB=botiga
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_USER=admin
+     # - POSTGRES_USER=admin #angel user db
+     # - POSTGRES_PASSWORD=admin #angel pasword db
+      - POSTGRES_USER=sergio #sergio user db
+      - POSTGRES_PASSWORD=1234 #sergio pasword db
     ports:
       - "5432:5432"
     volumes:
@@ -17,8 +19,10 @@ services:
     ports:
       - "83:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: 2023_angel.ivanov@iticbcn.cat
-      PGADMIN_DEFAULT_PASSWORD: angel123
+      # PGADMIN_DEFAULT_EMAIL: 2023_angel.ivanov@iticbcn.cat # angel mail pgadmin4
+      # PGADMIN_DEFAULT_PASSWORD: angel123 # angel password pgadmin4
+      PGADMIN_DEFAULT_EMAIL: 2023_sergio.castillero@iticbcn.cat # sergio mail pgadmin4
+      PGADMIN_DEFAULT_PASSWORD: 235sergioC # sergio password pgadmin4
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 volumes:
