@@ -36,17 +36,30 @@ def create_product(request):
         return Response(serializer.data)
 
 
+# funcio que mostra tots els productes del cataleg sense anar-hi a create_product
+@api_view(['GET'])
+def products_cat(request):
+    if request.method == 'GET':
+        catalogo = Catalogo.objects.all()
+        serializer = ProductoSerializer(catalogo, many=True)
+        return Response(serializer.data)
+
 
 # funcionalidad eliminar producto funciona por el id del producto
-@api_view(['DELETE'])
+@api_view(['DELETE', 'GET'])
 def delete_product(request, pk):
+    try:
+        product = Catalogo.objects.get(pk=pk)
+    except Catalogo.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    product = get_object_or_404(Catalogo, pk=pk)
+    if request.method == 'GET':
+        serializer = ProductoSerializer(product)
+        return Response(serializer.data)
 
-    if request.method == 'DELETE':
+    elif request.method == 'DELETE':
         product.delete()
-        message = {'detail': 'Product with ID {} was deleted successfully.'.format(pk)}
-        return Response(message, status=status.HTTP_200_OK)
+        return Response({"message": f"Product with ID {pk} deleted successfully"})
 
 
 
