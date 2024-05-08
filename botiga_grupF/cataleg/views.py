@@ -6,8 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from .models import Catalogo, CatalogoSecciones
-from .serializers import ProductoSerializer
-
+from .serializers import ProductoSerializer, CatalogoSeccionesSerializer
 
 
 # de prueba
@@ -96,3 +95,19 @@ def update_product(request, pk):
 
         serializer = ProductoSerializer(product)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+#funcio per crear seccions per poder clasificar els productes (taula CatalogoSecciones)
+@api_view(['GET', 'POST'])
+def create_section(request):
+
+    if request.method == 'POST':
+        serializer = CatalogoSeccionesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    elif request.method == 'GET':
+        catalogosecciones = CatalogoSecciones.objects.all()
+        serializer = CatalogoSeccionesSerializer(catalogosecciones, many=True)
+        return Response(serializer.data)
