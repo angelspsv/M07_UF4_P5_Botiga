@@ -61,6 +61,23 @@ def delete_product(request, pk):
         return Response({"message": f"Product with ID {pk} deleted successfully"})
 
 
+# funcionalidad eliminar seccion de producto. funciona por el id de la seccion
+@api_view(['DELETE', 'GET'])
+def delete_section(request, pk):
+    try:
+        section = CatalogoSecciones.objects.get(pk=pk)
+    except CatalogoSecciones.DoesNotExist:
+        return Response({"error": "Section not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CatalogoSeccionesSerializer(section)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        section.delete()
+        return Response({"message": f"Section with ID {pk} deleted successfully"})
+
+
 
 # funcionalidad actualizar producto
 # con GET primero recupero desde la bbdd el elemento con pk indicada en la url
