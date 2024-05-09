@@ -114,6 +114,32 @@ def update_product(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# la funcion update_section actualiza las secciones
+@api_view(['GET', 'PUT', 'PATCH'])
+def update_section(request, pk):
+    if request.method == 'GET':
+        section = CatalogoSecciones.objects.get(pk=pk)
+        serializer = CatalogoSeccionesSerializer(section)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT' or request.method == 'PATCH':
+        if not request.data or not 'id_seccion' in request.data:
+            return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        section = CatalogoSecciones.objects.get(pk=pk)
+        if section is None:
+            return Response({"error": "Section not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        section.id_seccion = request.data['id_seccion']
+        section.nombre = request.data['nombre']
+        section.save()
+
+        serializer = CatalogoSeccionesSerializer(section)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
 #funcio per crear seccions per poder clasificar els productes (taula CatalogoSecciones)
 @api_view(['GET', 'POST'])
 def create_section(request):
