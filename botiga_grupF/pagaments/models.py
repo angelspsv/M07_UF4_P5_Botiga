@@ -10,4 +10,3 @@ class Pagos(models.Model):
     # id_tarjeta = models.ForeignKey(UsuariosTarjetas, on_delete=models.CASCADE)
     # id_usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
-# linies comentades per poder executar i provar el funcionament de la ruta confirm_card...
