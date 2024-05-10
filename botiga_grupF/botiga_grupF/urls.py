@@ -6,5 +6,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cataleg/', include('cataleg.urls')),
-    path('usuarios/', include('usuarios.urls')),  # Incluye las rutas definidas en usuarios/urls.py
+    path('usuarios/', include('usuarios.urls')), 
+    path('carrito/', include('carrito.urls')),
+
 ]
