@@ -76,14 +76,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'botiga',
-        'USER': 'sergio', # sergio user
-        'PASSWORD': '1234', # sergio password
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
 #'USER': 'admin', # angel user
 #'PASSWORD': 'admin', # angel password
+# 'USER': 'sergio', # sergio user
+# 'PASSWORD': '1234', # sergio password
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

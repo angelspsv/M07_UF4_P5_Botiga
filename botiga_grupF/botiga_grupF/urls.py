@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 URL configuration for botiga_grupF project.
 

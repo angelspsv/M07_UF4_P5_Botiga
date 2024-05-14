@@ -5,12 +5,10 @@ from rest_framework.response import Response
 from decimal import Decimal
 from .models import Pagos
 from .serializers import PagoSerializer
-
-
-# linies comentades per poder executar i provar el funcionament de la ruta confirm_card...
-# from.models import UsuariosTarjetas
-# from.serializers import UsuariosTarjetasSerializer
-
+from carrito.models import Carrito
+from usuarios.models import Usuarios
+from carrito.serializers import CarritoSerializer
+from rest_framework.views import APIView
 
 
 # funció per fer proves
@@ -20,31 +18,19 @@ def hello_world_view(request):
     return Response({"message": message}, status=status.HTTP_200_OK)
 
 
-# cogemos y accedemos a todos los carritos mediante
-# id_carritos (GET) y leugo, mediante el serializer
-# mostramos/modificamos el campo de carrito.finalizado de false a true (PUT)
+# se escribe la ruta /pagar_carrito/id/ donde la 'id' es la id_carrito
+# al hacer PUT se actualiza el campo historico de carrito de false a true
+# muestra un mensaje de "Carrito updated successfully"
 
-@api_view(['GET', 'PUT'])
-def pago_carrito(request):
-    #validamos metodo
-    if request.method != 'POST':
-        return Response({"error": "Invalid request method"}, status=status.HTTP_400_BAD_REQUEST)
-    #validamos obj recibido
-    serializer = PagoSerializer(data=request.data)
-    if not serializer.is_valid():
-        return Response({"error": "Invalid request data"}, status=status.HTTP_400_BAD_REQUEST)
-    # validamos carrito existe
-    carrito = get_object_or_404(Carrito, pk=serializer.id_carrito)
+@api_view(['PUT'])
+def pago_carrito(request, pk):
+    if request.method == 'PUT':
+        try:
+            carrito = Carrito.objects.get(id_carrito=pk)
+        except Carrito.DoesNotExist:
+            return Response({'error': 'Carrito not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    #validamos existe usuario
-    usuario = get_object_or_404(Usuarios, pk=serializer.id_usuario)
+        carrito.finalizado = True
+        carrito.save()
 
-    #creamos pago
-    serializer.save()
-
-    #actualizamos carrito_finalizado (hist)
-    carrito.finalizado = True
-    carrito.save()
-
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+        return Response({'message': 'Carrito updated successfully'}, status=status.HTTP_200_OK)
